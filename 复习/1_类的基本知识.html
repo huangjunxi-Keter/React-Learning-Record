@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //创建一个 Person 类
+        class Person {
+            //构造器函数
+            constructor(name, age) {
+                //构造器中的this是类的实例对象
+                this.name = name;
+                this.age = age;
+            }
+
+            //一般方法
+            speak () {
+                //speak放在类的原型对象上，供实例使用
+                //通过Person实例调用speak时，speak中的this就是Person实例
+                //（实例调用时，this指向可以通过 .call 等方法更改）
+                console.log(`我叫${this.name}，我的年龄是${this.age}`);
+            }
+        }
+        
+        //创建一个Person的实例对象
+        const p1 = new Person('tom', 18);
+        const p2 = new Person('jerry', 19);
+
+        console.log(p1);
+        console.log(p2);
+
+        p1.speak();
+        p2.speak();
+        p1.speak.call({name:'【更改了this指向】', age:'【更改了this指向】'});
+
+        //-------------------------------------------------------------------------------------------------------------
+
+        //创建一个Student类，继承于Person类
+        class Student extends Person {
+            constructor(name, age, grade) {
+                //重写父类构造函数，必须在最开始调用super
+                super(name, age);
+                this.grade = grade;
+            }
+            //重写从父类继承过来的方法
+            speak() {
+                console.log(`我叫${this.name}，我的年龄是${this.age}，我读的是${this.grade}`);
+            }
+            study() {
+                console.log("我很努力的学习");
+            }
+        }
+
+        const s1 = new Student('小张',15, '高一');
+
+        console.log(s1);
+
+        s1.speak();
+        s1.study();
+    </script>
+</body>
+</html>
