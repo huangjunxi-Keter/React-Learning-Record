@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用jsx创建虚拟DOM</title>
+</head>
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="/js/react.development.js"></script>
+    <!-- 引入react-dom 用于支持react操作DOM -->
+    <script src="/js/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="/js/babel.min.js"></script>
+
+    <!-- text/babel 表示标签中写的不是js 并且靠babel翻译-->
+    <script type="text/babel">
+
+        //1.创建组件
+        class Weather extends React.Component {
+            //初始化状态
+            state = {isHot:false};
+
+            render() {
+                const {isHot} = this.state;
+                return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
+            }
+
+            //自定义方法————要用赋值语句的形式 + 箭头函数（箭头函数自身没有this，调用时会向外层寻找this）
+            //直接定义函数，函数在原生类上，自定义函数，在类的实例上
+            changeWeather = () => {
+                const isHot = this.state.isHot;
+                this.setState({isHot:!isHot});
+            }
+        }
+
+        //2.渲染组件到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'));
+
+    </script>
+</body>
+</html>
