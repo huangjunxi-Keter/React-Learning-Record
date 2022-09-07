@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用jsx创建虚拟DOM</title>
+</head>
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="/js/react.development.js"></script>
+    <!-- 引入react-dom 用于支持react操作DOM -->
+    <script src="/js/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="/js/babel.min.js"></script>
+
+    <!-- text/babel 表示标签中写的不是js 并且靠babel翻译-->
+    <script type="text/babel">
+        //创建组件
+        class Person extends React.Component {
+            render() {
+                const {name,sex,age} = this.props;
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>    
+                        <li>年龄：{age}</li>
+                    </ul>
+                );
+            }
+        } 
+        //渲染到页面
+        ReactDOM.render(<Person name='tom' sex='女' age='18'/>, document.getElementById('test1'));
+        ReactDOM.render(<Person name='jerry' sex='男' age='19'/>, document.getElementById('test2'));
+        const data = {name: '老刘', sex: '女', age: 30};
+        ReactDOM.render(<Person {...data}/>, document.getElementById('test3'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let arr1 = [1,3,5,7,9];
+        let arr2 = [2,4,6,8,10];
+
+        console.log(...arr1); //展开一个数组
+
+        let arr3 = [...arr1,...arr2]; //连接数组
+
+        //在函数中使用
+        function sum (...numbers) {
+            console.log(numbers);
+            return numbers.reduce((preValue, currentValue) => {
+                return preValue + currentValue;
+            });
+        }
+        console.log(sum(1,2,3,4,5,6,7,8,9,10));
+
+        let person = {name:'tom', age:18};
+        //展开运算符不能展开对象，会报错
+        console.log(...person);
+        //构造字面量时使用展开语法
+        let person2 = {...person};
+        //复制对象的同时修改属性（合并）
+        let person3 = {...person, name:'jack', address:'地球'};
+    </script>
+</body>
+</html>
